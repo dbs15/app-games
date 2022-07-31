@@ -9,8 +9,28 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ZStack {
+            Color(red: 17/255, green: 28/255, blue: 52/255, opacity: 1.0).ignoresSafeArea()
+            
+            VStack{
+                Image("AppLogo").resizable().aspectRatio(contentMode: .fit).frame(width: 250)
+                HomeAndResgister()
+                
+            }
+        }
+    }
+}
+
+struct HomeAndResgister: View {
+    var body: some View{
+        
+        VStack {
+            
+            HStack {
+                Text("INICIA SESIÓN")
+                Text("REGISTRATE")
+            }.foregroundColor(.white)
+        }
     }
 }
 
