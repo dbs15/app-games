@@ -9,22 +9,26 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ZStack {
-            Color(red: 17/255, green: 28/255, blue: 52/255, opacity: 1.0).ignoresSafeArea()
-            
-            VStack{
-                Image("AppLogo").resizable().aspectRatio(contentMode: .fit).frame(width: 250).padding(.bottom, 42)
+        
+        
+        NavigationView {
+            ZStack {
+                Color(red: 17/255, green: 28/255, blue: 52/255, opacity: 1.0).ignoresSafeArea()
                 
-                HomeAndResgisterView()
-                
-            }
+                VStack{
+                    Image("AppLogo").resizable().aspectRatio(contentMode: .fit).frame(width: 250).padding(.bottom, 42)
+                    
+                    HomeAndResgisterView()
+                    
+                }
+            }.navigationBarHidden(true)
         }
     }
 }
 
 struct HomeAndResgisterView: View {
     
-    @State var loginType = false
+    @State var loginType = true
     
     var body: some View{
         
@@ -68,6 +72,7 @@ struct LoginView:View {
     
     @State var correo = ""
     @State var contrasena = ""
+    @State var isHomeActive = false
     
     var body: some View{
         
@@ -130,13 +135,20 @@ struct LoginView:View {
 
                 
             }.padding(.horizontal, 77.0)
+            
+            NavigationLink(destination: Home(), isActive: $isHomeActive) {
+                EmptyView()
+            }
         }
+    }
+    
+    func login(){
+        print("iniciando sesión")
+        isHomeActive = true
     }
 }
 
-func login(){
-    print("iniciando sesión")
-}
+
 
 func facebookLogin(){
     print("iniciando sesión")
@@ -164,7 +176,7 @@ struct RegisterView:View {
                     Text("Puedes cambiar o elegirla más adelante")
                         .font(.footnote)
                         .fontWeight(.light)
-                        .foregroundColor(.gray).padding(.bottom)
+                        .foregroundColor(.gray)
                     
                     Button(action: tomarFoto) {
                         ZStack{
